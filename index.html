@@ -31,9 +31,17 @@
             <!-- Weather -->
             <div class="col-8 p-2">
                 <!-- Today's Forecast -->
-                <div class="m-3" id="forecast"><p class="px-1 border-dark border" hidden="true">WEATHER FORECAST</p></div>
+                <div class="m-3" id="forecast"  hidden="true">
+                    <div class="p-1 border-dark border bg-secondary bg-opacity-25" id="todays-forecast">
+                        <span class="h3 fw-bold" id="cityname"></span><img src="" alt="" width="50" height="50" id="icon"><br/>
+                        <p id="temp"></p>
+                        <p id="wind"></p>
+                        <p id="humidity"></p>
+                        <p>UV Index: <span class="" id="uvi"></span></p>
+                    </div>
+                </div>
                 <!-- 5 Day Weather Forecast Cards -->
-                <div class="row justify-content-around m-3" id="forecast-cards">
+                <div class="row justify-content-around m-3" id="forecast-cards"  hidden="true">
                     <h3 class="px-0">5 Day Forecast:</h3>
                 </div>
             </div>
@@ -41,6 +49,8 @@
     </main>
 
     <footer></footer>
+    <!-- Moment.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- JS Link -->
     <script src="./assets/js/script.js"></script>
 </body>
