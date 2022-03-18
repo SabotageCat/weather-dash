@@ -22,7 +22,7 @@ document.getElementById("search").addEventListener("click", function(event) {
     }
 
     // search function to fetch weather data
-    search();
+    search(userSearch.value);
 
     // add to searchHistory array
     addSearchHistory();
@@ -48,8 +48,8 @@ var createHistoryItem = function() {
 };
 
 // Search for city's weather
-var search = function() {
-    var apiUrlGeo = "https://api.openweathermap.org/geo/1.0/direct?q=" + userSearch.value + "&limit=1&appid=" + apiKey;
+var search = function(city) {
+    var apiUrlGeo = "https://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=1&appid=" + apiKey;
 
     fetch(apiUrlGeo).then(function(response) {
         // response successful
@@ -70,7 +70,7 @@ var search = function() {
                         .then(function(data) {
                             console.log(data);
                             var weather = data.current;
-                            displayWeather(weather.temp, weather.uvi, weather.humidity, weather.wind_speed, weather.weather[0].icon, weather.weather[0].description);
+                            displayWeather(weather.temp, weather.uvi, weather.humidity, weather.wind_speed, weather.weather[0].icon, weather.weather[0].description, city);
                         });
                     } else {
                         // if unsuccessful
@@ -127,7 +127,7 @@ var displayCards = function() {
 };
 
 // display current weather and 5 day forecast
-var displayWeather = function(temp, uvi, humidity, wind, icon, desc) {
+var displayWeather = function(temp, uvi, humidity, wind, icon, desc, city) {
 
     var forecast = document.getElementById("forecast");
     var cityEL = document.getElementById("cityname");
@@ -137,7 +137,7 @@ var displayWeather = function(temp, uvi, humidity, wind, icon, desc) {
     var uviEL = document.getElementById("uvi");
     var iconEL = document.getElementById("icon");
 
-    cityEL.textContent = userSearch.value + " " + todayDate;
+    cityEL.textContent = city + " " + todayDate;
 
     userSearch.value = "";
 
@@ -167,6 +167,12 @@ var addSearchHistory = function() {
     createHistoryItem();
     
 };
+
+searchHistoryList.addEventListener("click", function(event) {
+    event.preventDefault();
+    var city = event.target.textContent;
+    search(city);
+});
 
 // load search history
 createHistoryItem();
