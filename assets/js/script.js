@@ -17,6 +17,7 @@ document.getElementById("search").addEventListener("click", function(event) {
 
     // if nothing in search form then break
     if (!userSearch.value) {
+        userSearch.setAttribute("placeholder", "PLEASE ENTER A CITY NAME");
         return
     }
 
@@ -67,6 +68,7 @@ var search = function() {
                     if (response.ok) {
                         response.json()
                         .then(function(data) {
+                            console.log(data);
                             var weather = data.current;
                             displayWeather(weather.temp, weather.uvi, weather.humidity, weather.wind_speed, weather.weather[0].icon, weather.weather[0].description);
                         });
@@ -113,7 +115,7 @@ var fiveDayDisplay = function(fiveDayData) {
         var icon = day.weather[0].icon;
         var desc = day.weather[0].description;
 
-        card.innerHTML = "<strong>" + todayDate + "</strong>" + "<br>" + "<img src='https://openweathermap.org/img/wn/" + icon + "@2x.png' alt='" + desc + "' width='40' height='40'>" + "<br>" + "Temp: " + temp + "°F" + "<br>" + "Wind: " + wind + " MPH" + "<br>" + "Humidity: " + humidity + "%";
+        card.innerHTML = "<strong>" + moment().add([i+1], 'd').format("[(]M[/]D[/]YYYY[)]") + "</strong>" + "<br>" + "<img src='https://openweathermap.org/img/wn/" + icon + "@2x.png' alt='" + desc + "' width='40' height='40'>" + "<br>" + "Temp: " + temp + "°F" + "<br>" + "Wind: " + wind + " MPH" + "<br>" + "Humidity: " + humidity + "%";
         document.getElementById("forecast-cards").removeAttribute("hidden");
 
     }
@@ -160,9 +162,10 @@ var displayWeather = function(temp, uvi, humidity, wind, icon, desc) {
 
 // add to searchHistory array
 var addSearchHistory = function() {
-    var searchHistoryItem = userSearch.value;
-    searchHistory.push(searchHistoryItem);
+    var city = userSearch.value.trim();
+    searchHistory.push(city);
     createHistoryItem();
+    
 };
 
 // load search history
