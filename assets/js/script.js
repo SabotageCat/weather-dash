@@ -102,7 +102,7 @@ var fiveDayForecast = function(lat, lon) {
 };
 
 var fiveDayDisplay = function(fiveDayData) {
-    console.log(fiveDayData);
+    console.log(fiveDayData.daily[0].weather[0].description);
     debugger;
     for (var i = 0; i < 5; i++) {
         var day = fiveDayData.daily[i];
@@ -110,8 +110,11 @@ var fiveDayDisplay = function(fiveDayData) {
         var temp = day.temp.day;
         var wind = day.wind_speed;
         var humidity = day.humidity;
+        var icon = day.weather[0].icon;
+        var desc = day.weather[0].description;
 
-        card.textContent = todayDate;
+        card.innerHTML = "<strong>" + todayDate + "</strong>" + "<br>" + "<img src='https://openweathermap.org/img/wn/" + icon + "@2x.png' alt='" + desc + "' width='40' height='40'>" + "<br>" + "Temp: " + temp + "°F" + "<br>" + "Wind: " + wind + " MPH" + "<br>" + "Humidity: " + humidity + "%";
+        document.getElementById("forecast-cards").removeAttribute("hidden");
 
     }
     
