@@ -1,0 +1,16 @@
+* {
+    margin: 0;
+}
+
+header {
+    background-image: linear-gradient(to right, DodgerBlue, DarkSlateBlue);
+    color: white;
+}
+
+body {
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+input {
+    width: 100%;
+}
